@@ -50,3 +50,65 @@ CREATE TABLE cats4  (
 ```
 
 ### primary key
+the unique identifer
+```SQL
+CREATE TABLE unique_cats (
+	cat_id INT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    age INT NOT NULL
+);
+
+-- Another option:
+CREATE TABLE unique_cats2 (
+	cat_id INT,
+    name VARCHAR(100) NOT NULL,
+    age INT NOT NULL,
+    PRIMARY KEY (cat_id)
+);
+```
+
+### auto increment
+automatically generates a unique sequential number for a column (default is 1)
+```SQL
+CREATE TABLE unique_cats3 (
+    cat_id INT AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    age INT NOT NULL,
+    PRIMARY KEY (cat_id)
+);
+```
+
+
+### SELECT & WHERER
+```SQL
+SELECT name, breed FROM cats;
+
+
+SELECT * FROM cats WHERE name ='Egg';
+
+SELECT cat_id, age FROM cats WHERE cat_id=age;
+```
+
+### rename a column when print it out (temporary thing)
+
+```SQL
+SELECT cat_id AS id, name FROM cats;
+```
+
+### Update (UPDATE ... SET)
+```SQL
+UPDATE cats SET breed='Shorthair' WHERE breed='Tabby';
+```
+
+**try Select before you Update**
+1. 確認資料存在
+2. 有時條件不對 ,可能會更新到錯誤的資料
+
+### delete(DELETE FROM)
+```SQL
+-- delete all cats with name of 'Egg'
+DELETE FROM cats WHERE name='Egg';
+
+-- delete all rows in the cats table
+DELETE FROM cats;
+```
