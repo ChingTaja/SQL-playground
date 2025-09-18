@@ -51,3 +51,50 @@ SELECT title, pages FROM books WHERE pages = (SELECT MAX(pages) FROM books)
 方法Ｂ
 這個只會回傳 一個數值 → 整張表中最小的頁數
 不會顯示是哪本書
+
+- Group By Multiple Column
+
+```SQL
+SELECT author_fname, author_lname, COUNT(*) 
+FROM books 
+GROUP BY author_lname, author_fname;
+```
+
+```SQL
+SELECT CONCAT(author_fname, ' ', author_lname) AS author,  COUNT(*)
+FROM books
+GROUP BY author;
+```
+
+- Search for every group's max or min value
+```SQL
+SELECT 
+	author_lname, 
+        author_fname,
+	COUNT(*) as books_written, 
+	MAX(released_year) AS latest_release,
+	MIN(released_year)  AS earliest_release
+FROM books GROUP BY author_lname, author_fname;
+```
+
+- SUM 欄位內數值加總
+```SQL
+SELECT SUM(pages) FROM books
+ 
+SELECT author_lname, COUNT(*), SUM(pages)
+FROM books
+GROUP BY author_lname;
+```
+
+- AVG (average)
+```SQL
+SELECT AVG(pages) FROM books;
+ 
+SELECT AVG(released_year) FROM books;
+ 
+SELECT 
+    released_year, 
+    AVG(stock_quantity), 
+    COUNT(*) FROM books
+GROUP BY released_year;
+```

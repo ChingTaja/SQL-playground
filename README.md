@@ -5,3 +5,4 @@ Learning map
 3. string function
 4. refine selection
 5. aggregate function
+6. data type
