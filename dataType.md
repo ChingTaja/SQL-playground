@@ -17,4 +17,23 @@ spec: https://dev.mysql.com/doc/refman/8.4/en/integer-types.html
 
 unsigned means no negative
 
-#### Decimal
+#### Decimal （more exact, take more space）--> 更精確
+- （up to total number of digits,up to digits after decimal）
+```SQL
+Decimal(5,2)
+```
+![alt text](<截圖 2025-09-18 晚上10.46.14.png>)
+
+#### float & double (stoer more larger decimal using less space, but it comes at the **cost of precision** )
+![alt text](image.png)
+```SQL
+-- persume x is float
+-- persume y is double
+INSERT INTO nums(x,y) VALUES (1.12345678, 1.908789789789)
+-- x 1.123456 (7 digits)
+-- y 1.12345678 (15 digits)
+
+INSERT INTO nums(x,y) VALUES (1.12345678, 1.9087897897898789789678678)
+-- x 1.123456 (7 digits)
+-- y 1.12345678 (15 digits)
+```
