@@ -37,3 +37,44 @@ INSERT INTO nums(x,y) VALUES (1.12345678, 1.9087897897898789789678678)
 -- x 1.123456 (7 digits)
 -- y 1.12345678 (15 digits)
 ```
+
+#### DATE Type （DATE, TIME, DATETIME）
+spec: https://dev.mysql.com/doc/refman/8.4/en/date-and-time-functions.html
+```SQL
+CREATE TABLE people (
+	name VARCHAR(100),
+    birthdate DATE,
+    birthtime TIME,
+    birthdt DATETIME
+);
+
+INSERT INTO people (name, birthdate, birthtime, birthdt)
+VALUES ('Juan', '2020-08-15', '23:59:00', '2020-08-15 23:59:00');
+```
+
+#### Current time , date
+```SQL
+SELECT CURTIME();
+ 
+SELECT CURDATE();
+ 
+SELECT NOW();
+ 
+INSERT INTO people (name, birthdate, birthtime, birthdt)
+VALUES ('Hazel', CURDATE(), CURTIME(), NOW());
+```
+
+```SQL
+ SELECT 
+   birthdate,
+   DAY(birthdate),
+   DAYOFWEEK(birthdate),
+   DAYOFYEAR(birthdate)
+FROM people;
+ 
+SELECT 
+   birthdate,
+   MONTHNAME(birthdate),
+   YEAR(birthdate)
+FROM people;
+```

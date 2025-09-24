@@ -6,3 +6,6 @@ Learning map
 4. refine selection
 5. aggregate function
 6. data type
+- decimal float double
+- date, time, datetime
+- char, varchar
