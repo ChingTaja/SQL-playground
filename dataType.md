@@ -65,16 +65,42 @@ VALUES ('Hazel', CURDATE(), CURTIME(), NOW());
 ```
 
 ```SQL
- SELECT 
-   birthdate,
-   DAY(birthdate),
-   DAYOFWEEK(birthdate),
-   DAYOFYEAR(birthdate)
+SELECT 
+  birthdate,
+  DAY(birthdate),
+  DAYOFWEEK(birthdate),
+  DAYOFYEAR(birthdate)
 FROM people;
  
 SELECT 
-   birthdate,
-   MONTHNAME(birthdate),
-   YEAR(birthdate)
+  birthdate,
+  MONTHNAME(birthdate),
+  YEAR(birthdate)
 FROM people;
+```
+
+### Time 
+```SQL
+SELECT 
+   birthtime,
+   HOUR(birthtime),
+   MINUTE(birthtime)
+FROM people;
+ 
+SELECT 
+   birthdt,
+   MONTH(birthdt),
+   DAY(birthdt),
+   HOUR(birthdt),
+   MINUTE(birthdt)
+FROM people;
+```
+
+### Format Date
+```SQL
+SELECT birthdate, DATE_FORMAT(birthdate, '%a %b %D') FROM people;
+ 
+SELECT birthdt, DATE_FORMAT(birthdt, '%H:%i') FROM people;
+ 
+SELECT birthdt, DATE_FORMAT(birthdt, 'BORN ON: %r') FROM people;
 ```
