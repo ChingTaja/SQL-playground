@@ -97,6 +97,7 @@ FROM people;
 ```
 
 ### Format Date
+https://dev.mysql.com/doc/refman/8.4/en/date-and-time-functions.html
 ```SQL
 SELECT birthdate, DATE_FORMAT(birthdate, '%a %b %D') FROM people;
  
