@@ -152,3 +152,32 @@ SELECT
   END AS stock
 FROM books;
 ```
+
+
+### 這樣寫是不會有任何結果的 
+```SQL
+SELECT * FROM books
+-- ❌
+WHERE author_lname = NULL;
+```
+
+正確的做法: 
+`IS NULL`
+`IS NOT NULL`
+
+```SQL
+SELECT * FROM books
+WHERE author_lname IS NULL;
+```
+
+excercise
+```SQL
+SELECT author_fname, author_lname,
+	CASE
+        WHEN COUNT(*) = 1 THEN '1 book'
+        ELSE CONCAT(COUNT(*), ' books')
+	END AS count
+FROM books
+WHERE author_lname IS NOT NULL
+GROUP BY author_fname, author_lname;
+```
