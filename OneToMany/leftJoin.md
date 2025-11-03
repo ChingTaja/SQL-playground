@@ -14,6 +14,22 @@ FROM customers
 LEFT JOIN orders
 ON orders.customer_id = customers.id;
 ```
+左邊表（Left Table）：customers
+右邊表（Right Table）：orders
+保留左邊資料
+
+對比 RIGHT JOIN
+
+```SQL
+SELECT c.name, o.amount
+FROM customers c
+RIGHT JOIN orders o
+ON c.id = o.customer_id;
+```
+左邊表（Left Table）：customers
+右邊表（Right Table）：orders
+保留右邊資料
+
 
 💡那為什麼我們要用 LEFT JOIN 呢？
 
@@ -57,3 +73,25 @@ ON customers.id = orders.customer_id;
 因為在這個資料庫裡，
 每筆 orders 都一定有對應的 customer_id。
 也就是說，orders（左表）的每一筆都有匹配的顧客。
+
+left join + group by + IFNULL
+
+
+檢查一個表達式，如果結果是 NULL，就用我們指定的替代值
+```SQL
+IFNULL(要檢查的欄位或運算, 替代值)
+```
+
+```SQL
+SELECT
+  first_name,
+  last_name,
+  IFNULL(SUM(amount), 0) AS money_spent
+FROM customers
+LEFT JOIN orders ON customers.id = orders.customer_id
+GROUP BY first_name, last_name;
+```
+
+先計算 SUM(amount)（顧客總花費），
+如果結果是 NULL（代表他沒下過訂單），
+就把 NULL 改成 0
