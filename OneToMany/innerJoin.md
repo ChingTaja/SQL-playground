@@ -48,3 +48,23 @@ FROM orders
 JOIN customers
 ON customers.id = orders.customer_id;
 ```
+
+| JOIN 類型    | 表順序是否影響結果？ | 說明               |
+| ---------- | ---------- | ---------------- |
+| INNER JOIN | ❌ 不影響      | 只取交集             |
+| LEFT JOIN  | ✅ 影響       | 取左邊所有資料          |
+| RIGHT JOIN | ✅ 影響       | 取右邊所有資料          |
+| FULL JOIN  | ❌ 不影響      | 取聯集（但 MySQL 不支援） |
+
+
+# inner join + group by
+```SQL
+SELECT 
+    first_name, last_name, SUM(amount) AS total
+FROM
+    customers
+        JOIN
+    orders ON orders.customer_id = customers.id
+GROUP BY first_name , last_name
+ORDER BY total;
+```
