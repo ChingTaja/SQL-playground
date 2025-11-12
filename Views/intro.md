@@ -47,16 +47,3 @@ where released_year = 2010;
 但是對 view 就行不通，它會告訴我： cannot delete from join view called full_reviews
 
 不同類型的 view 有不同規則，可能會很複雜，官方文件有一整頁講解這個問題。基本上，只有極少部分的 view 是可以更新（updatable）和插入（insertable）的
-
-```SQL
-CREATE VIEW ordered_series AS
-SELECT * FROM series ORDER BY released_year;
-
-CREATE OR REPLACE VIEW ordered_series AS
-SELECT * FROM series ORDER BY released_year DESC;
-
-ALTER VIEW ordered_series AS
-SELECT * FROM series ORDER BY released_year;
-
-DROP VIEW ordered_series;
-```
