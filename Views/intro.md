@@ -30,3 +30,33 @@ JOIN reviewers
 SELECT * FROM full_reviews
 WHERE genre = 'Animation';
 ```
+
+Views 可能看起來像一個表格
+在某些情況下它們就像表格一樣
+但實際上它們背後並不是真正的表格。這就意味著，我們不能對 view 執行所有表格操作
+
+如果這是一個真正的表格，我可以這樣做：刪除某些資料。
+例如，我想刪除 2010 年發行的所有資料。
+對一個普通表格，我會寫：
+
+```SQL
+delete from full_reviews
+where released_year = 2010;
+```
+
+但是對 view 就行不通，它會告訴我： cannot delete from join view called full_reviews
+
+不同類型的 view 有不同規則，可能會很複雜，官方文件有一整頁講解這個問題。基本上，只有極少部分的 view 是可以更新（updatable）和插入（insertable）的
+
+```SQL
+CREATE VIEW ordered_series AS
+SELECT * FROM series ORDER BY released_year;
+
+CREATE OR REPLACE VIEW ordered_series AS
+SELECT * FROM series ORDER BY released_year DESC;
+
+ALTER VIEW ordered_series AS
+SELECT * FROM series ORDER BY released_year;
+
+DROP VIEW ordered_series;
+```
