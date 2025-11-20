@@ -3,40 +3,52 @@
 
 GROUP BY 一起使用的子句：WITH ROLLUP
 
+案例：每月水果銷售總額
 
-假設我們使用：
+假設我們有一個 sales 表：
+| month | product | amount |
+| ----- | ------- | ------ |
+| Jan   | Apple   | 100    |
+| Jan   | Banana  | 150    |
+| Feb   | Apple   | 120    |
+| Feb   | Banana  | 130    |
+
+我們想要：
+
+1.每個月每種水果銷售額
+
+2.每月小計
+
+3.全部總計
+
 ```SQL
-SELECT * FROM full_reviews;
+SELECT month, product, SUM(amount) AS total_sales
+FROM sales
+GROUP BY month, product WITH ROLLUP;
 ```
 
-這是一個 view（資料視圖），把三個資料表 join 在一起
 
-接著我們用其中一個聚合函數，例如 AVG() 或 COUNT()
+結果
+| month | product | total_sales     |
+| ----- | ------- | --------------- |
+| Jan   | Apple   | 100             |   ------>  month + product
+| Jan   | Banana  | 150             |
+| Jan   | NULL    | 250   ← Jan 月小計 |  ------>  only month
+| Feb   | Apple   | 120             |
+| Feb   | Banana  | 130             | 
+| Feb   | NULL    | 250   ← Feb 月小計 | 
+| NULL  | NULL    | 500   ← 全年總計    |  ------>  SUM (250 + 250)
 
-✔ 整張表的平均評分
-```SQL
-SELECT AVG(rating) FROM full_reviews;
-```
-這會給我們整張表的平均值
 
-✔ 按 title 分組的平均評分
-```SQL
-SELECT title, AVG(rating)
-FROM full_reviews
-GROUP BY title;
-```
+🔹 對應公式理解
 
-同樣是 AVG()，但現在作用在「每一組」，也就是每個 title 上面。
+每個組（month + product）：
+SUM(amount) WHERE month=? AND product=?
 
-🔹 使用 WITH ROLLUP
 
-現在，如果我們在上一個查詢後面加上：
-```SQL
-GROUP BY title WITH ROLLUP;
-```
+每個月小計：
+SUM(amount) WHERE month=?  (不分 product)
 
-結果看起來幾乎一樣，但會多出最後一列：
 
-最後一列的 title 是 NULL
-
-它代表 整張表的總平均
+全部總計：
+SUM(amount) OVER ALL
