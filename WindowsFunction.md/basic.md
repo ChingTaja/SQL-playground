@@ -1,3 +1,5 @@
+window function = 聚合 + 視窗
+
 精髓：在保留原始資料的同時，計算出群組相關的值
 
 假設我們有一個員工表（employees table），只有四列資料：
