@@ -14,6 +14,14 @@ INSERT INTO contacts (name, phone)
 VALUES ('billybob', '8781213455');
 ```
 
+| 比較       | PRIMARY KEY | UNIQUE            |
+| -------- | ----------- | ----------------- |
+| 唯一性      | ✅           | ✅                 |
+| 可否為 NULL | ❌           | ✅（可以，除非 NOT NULL） |
+| 表格數量     | 只能一個        | 可以多個  UNIQUE          |
+| 自動索引     | ✅           | ✅                 |
+
+
 #### CHECK
 - 限制欄位值必須符合特定條件 的約束（constraint），確保資料表中的資料符合規則
 ```SQL
