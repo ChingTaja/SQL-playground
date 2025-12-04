@@ -19,3 +19,5 @@ $$
 
 DELIMITER ;
 ```
+
+接著執行：source ig.sql
